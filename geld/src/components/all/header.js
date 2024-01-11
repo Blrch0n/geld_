@@ -15,12 +15,7 @@ export default function Header() {
     <section className="flex flex-row w-full py-[16px] bg-white">
       <div className="w-[1200px] h-[40px] m-auto flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-[8px] justify-between">
-          <Image
-            src="/logo.svg"
-            alt="Picture of the author"
-            width={40}
-            height={40}
-          ></Image>
+          <img src="/logo.svg" className="w-[40px] h-[40px]"></img>
           {menus.map((menu, index) => (
             <Link key={index} href={`/${menu}`}>
               <p

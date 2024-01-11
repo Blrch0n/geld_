@@ -73,7 +73,7 @@ app.post("/category", async (req, res) => {
   try {
     const verify = jwt.verify(authorization, "secret-boy");
     const { email } = verify;
-    const { categoryName } = req.body;
+    const { categoryName, IconColor, selectedIcon } = req.body;
     const filePath = "src/data/category.json";
     const rawFile = await fs.readFile(filePath, "utf8");
 
@@ -81,6 +81,8 @@ app.post("/category", async (req, res) => {
 
     file.push({
       categoryName,
+      IconColor,
+      selectedIcon,
       userEmail: email,
     });
 

@@ -8,7 +8,7 @@ import { useAuth } from "@/components/provider/AuthProvider";
 export default function AddRecord() {
   const [amount, setAmount] = useState("");
   const [isExpense, setIsExpense] = useState(true);
-  const { setIsOpenRecord } = useContext(Context);
+  const { setIsOpenRecord, IconColor, selectedIcon } = useContext(Context);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const { addRecord_ } = useAuth();
@@ -119,7 +119,7 @@ export default function AddRecord() {
             <input
               type="submit"
               className="bg-[#0166FF] rounded-[20px] w-full text-white h-[40px]"
-              onClick={(e) => {
+              onClick={() => {
                 addRecord_(amount, date, isExpense, selectedCategory, time);
                 setIsOpenRecord(false);
               }}

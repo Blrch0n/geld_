@@ -1,18 +1,25 @@
 import { Context } from "@/app/layout";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useAuth } from "../provider/AuthProvider";
 import IsIconsOpen from "./is_open_icons";
+import * as icons from "react-icons/gr";
+
+export const Context_ = createContext();
 
 export default function AddCategory() {
-  const { setIsOpenCategory, setIsIcon } = useContext(Context);
+  const { setIsOpenCategory, IconColor, selectedIcon } = useContext(Context);
   const [categoryName, setCatergoryName] = useState();
   const { addCategory } = useAuth();
+  const [categoryOpen, setCategoryOpen] = useState(false);
+
+  const Icon = icons[selectedIcon];
+
   return (
     <section className="absolute w-full h-screen flex items-center justify-center bg-[#00000080]">
       <div className="w-[494px] p-[24px] h-[236px] flex flex-col bg-white rounded-lg">
         <footer className="w-full h-[68px] flex items-center justify-between">
-          <h1 className="text-[20px] font-[600]">Add Record</h1>
+          <h1 className="text-[20px] font-[600]">Add Category</h1>
           <Image
             src="/esc.svg"
             width={24}
@@ -23,10 +30,16 @@ export default function AddCategory() {
             }}
           ></Image>
         </footer>
+        <hr></hr>
         <main className="w-full h-full flex flex-row gap-[8px] items-center relative">
-          <IsIconsOpen></IsIconsOpen>
-          <div className="h-[48px] bg-[#D1D5DB] w-[84px] rounded-lg flex items-center">
-            <div>{setIsIcon}</div>
+          {categoryOpen && <IsIconsOpen open={setCategoryOpen}></IsIconsOpen>}
+          <div
+            className="h-[48px] bg-[#D1D5DB] w-[84px] px-[16px] rounded-lg flex items-center"
+            onClick={() => {
+              setCategoryOpen(!categoryOpen);
+            }}
+          >
+            <Icon color={IconColor}></Icon>
             <Image
               src="black_arrow_down.svg"
               width={24}
@@ -47,7 +60,7 @@ export default function AddCategory() {
           type="submit"
           className="w-full bg-[#16A34A] text-white rounded-[20px] h-[80px]"
           onClick={() => {
-            addCategory(categoryName);
+            addCategory(categoryName, IconColor, selectedIcon);
             setIsOpenCategory(false);
           }}
         ></input>

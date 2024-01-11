@@ -1,14 +1,21 @@
+import { useContext } from "react";
 import { ColorData } from "./color_data";
 import { iconData } from "./open_icons";
 import SingleIcon from "./single_icon";
-export default function IsIconsOpen() {
+import { Context } from "@/app/layout";
+export default function IsIconsOpen(props) {
+  const { setIconColor, setSelectedIcon } = useContext(Context);
   return (
-    <section className="w-[312px] h-[336px] rounded-lg px-6 bg-white absolute top-20 left-0">
+    <section className="w-[312px] h-[336px] rounded-lg px-6 bg-slate-400 absolute top-20 left-0">
       <header className="w-full m-auto h-[264px] py-6 grid grid-rows-5 grid-cols-6">
         {iconData.map((data, index) => (
           <div
             className="w-full h-full flex items-center justify-center"
             key={index}
+            onClick={() => {
+              setSelectedIcon(data.icon);
+              props.open(false);
+            }}
           >
             <SingleIcon icon_={data.icon}></SingleIcon>
           </div>
@@ -22,6 +29,9 @@ export default function IsIconsOpen() {
               className="w-6 h-6 rounded-full"
               key={index}
               style={{ backgroundColor: `${span.color}` }}
+              onClick={() => {
+                setIconColor(span.color);
+              }}
             ></span>
           ))}
         </div>

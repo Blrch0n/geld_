@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [categoryData, setCategoryData] = useState();
   const [recordData, setRecordData] = useState();
+  const [refresh, useRefresh] = useState(1);
 
   const router = useRouter();
 
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
       setIsLoggedIn(true);
 
-      showCategory();
+      useRefresh(refresh + 1);
 
       router.push("/dashboard");
       // showOn();
@@ -68,7 +69,7 @@ export const AuthProvider = ({ children }) => {
 
       setIsLoggedIn(true);
 
-      showCategory();
+      useRefresh(refresh + 1);
 
       router.push("/dashboard");
       // showOn();
@@ -86,13 +87,15 @@ export const AuthProvider = ({ children }) => {
 
     router.push("/");
   };
-  const addCategory = async (categoryName) => {
+  const addCategory = async (categoryName, IconColor, selectedIcon) => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await api.post(
         "/category",
         {
           categoryName,
+          IconColor,
+          selectedIcon,
         },
         {
           headers: {
@@ -100,7 +103,7 @@ export const AuthProvider = ({ children }) => {
           },
         }
       );
-      showCategory();
+      useRefresh(refresh + 1);
     } catch (err) {
       console.log(err);
     }
@@ -129,7 +132,7 @@ export const AuthProvider = ({ children }) => {
           },
         }
       );
-      showRecords();
+      useRefresh(refresh + 1);
     } catch (err) {
       console.log(err);
     }
@@ -183,6 +186,10 @@ export const AuthProvider = ({ children }) => {
 
     // showOn();
   }, []);
+  useEffect(() => {
+    showCategory();
+    showRecords();
+  }, [refresh]);
   return (
     <AuthContext.Provider
       value={{

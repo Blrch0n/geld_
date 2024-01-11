@@ -1,10 +1,12 @@
 import { Context } from "@/app/layout";
 import { useAuth } from "@/components/provider/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import * as icons from "react-icons/gr";
 
 export default function ShowCategoryOfAddRecord(props) {
   const { categoryData, isReadyCategory } = useAuth();
   const { setIsOpenCategory } = useContext(Context);
+
   return (
     <div className="w-full h-[392px] top-44 left-0 absolute flex flex-col overflow-scroll bg-white rounded-xl ">
       <span
@@ -27,7 +29,6 @@ export default function ShowCategoryOfAddRecord(props) {
               props.open(false);
             }}
           >
-            <img src="/PlusCircle.svg" className="w-6 h-6"></img>
             <p>{category.categoryName} </p>
           </span>
         ))}
