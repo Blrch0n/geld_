@@ -3,11 +3,11 @@ import { iconData } from "./open_icons";
 import SingleIcon from "./single_icon";
 export default function IsIconsOpen() {
   return (
-    <section className="w-[312px] h-[336px] rounded-2 px-6 bg-white absolute top-20 left-0">
-      <header className="w-full m-auto h-[264px] py-6 bg-red-400 grid grid-rows-5 grid-cols-6">
+    <section className="w-[312px] h-[336px] rounded-lg px-6 bg-white absolute top-20 left-0">
+      <header className="w-full m-auto h-[264px] py-6 grid grid-rows-5 grid-cols-6">
         {iconData.map((data, index) => (
           <div
-            className="w-[18px] h-[18px] flex items-center justify-center"
+            className="w-full h-full flex items-center justify-center"
             key={index}
           >
             <SingleIcon icon_={data.icon}></SingleIcon>
@@ -15,7 +15,7 @@ export default function IsIconsOpen() {
         ))}
       </header>
       <hr></hr>
-      <footer className="w-full h-[72px] py-6 bg-blue-300">
+      <footer className="w-full h-[72px] py-6">
         <div className="flex flex-row w-full h-full items-center justify-between">
           {ColorData.map((span, index) => (
             <span
