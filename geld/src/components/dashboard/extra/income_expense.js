@@ -57,8 +57,10 @@ export default function IncomeExpense1() {
         <h1>Income - Expense</h1>
       </header>
       <hr></hr>
-      <main className="w-full h-full px-5">
-        <Bar options={options} data={data} />;
+      <main className="w-full h-full px-5 flex items-center justify-center">
+        <div className="w-[450px] h-[250px]">
+          <Bar options={options} data={data} />
+        </div>
       </main>
     </div>
   );

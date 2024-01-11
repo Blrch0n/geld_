@@ -13,10 +13,13 @@ export const Context = createContext();
 export default function RootLayout({ children }) {
   const [isOpenRecord, setIsOpenRecord] = useState(false);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
+  const [isIcon, setIsIcon] = useState("GrAccessibility");
   return (
     <Context.Provider
       value={{
         isOpenCategory,
+        isIcon,
+        setIsIcon,
         setIsOpenCategory,
         isOpenRecord,
         setIsOpenRecord,

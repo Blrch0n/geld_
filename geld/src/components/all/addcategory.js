@@ -2,9 +2,10 @@ import { Context } from "@/app/layout";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { useAuth } from "../provider/AuthProvider";
+import IsIconsOpen from "./is_open_icons";
 
 export default function AddCategory() {
-  const { setIsOpenCategory } = useContext(Context);
+  const { setIsOpenCategory, setIsIcon } = useContext(Context);
   const [categoryName, setCatergoryName] = useState();
   const { addCategory } = useAuth();
   return (
@@ -22,8 +23,10 @@ export default function AddCategory() {
             }}
           ></Image>
         </footer>
-        <main className="w-full h-full flex flex-row gap-[8px] items-center">
+        <main className="w-full h-full flex flex-row gap-[8px] items-center relative">
+          <IsIconsOpen></IsIconsOpen>
           <div className="h-[48px] bg-[#D1D5DB] w-[84px] rounded-lg flex items-center">
+            <div>{setIsIcon}</div>
             <Image
               src="black_arrow_down.svg"
               width={24}

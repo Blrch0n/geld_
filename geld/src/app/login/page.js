@@ -1,3 +1,4 @@
+import OpenIcons from "@/components/all/open_icons";
 import Login from "@/components/signup&login/signup";
 
 export default function LoginMain() {

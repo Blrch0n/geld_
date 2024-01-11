@@ -31,7 +31,7 @@ app.post("/sign-in", async (req, res) => {
     });
   }
 
-  const token = jwt.sign({ email }, "alkdgjkladjg");
+  const token = jwt.sign({ email }, "secret-boy");
 
   res.json({
     token,
@@ -71,7 +71,7 @@ app.post("/category", async (req, res) => {
     });
   }
   try {
-    const verify = jwt.verify(authorization, "alkdgjkladjg");
+    const verify = jwt.verify(authorization, "secret-boy");
     const { email } = verify;
     const { categoryName } = req.body;
     const filePath = "src/data/category.json";
@@ -102,7 +102,7 @@ app.get("/category", async (req, res) => {
     });
   }
   try {
-    const verify = jwt.verify(authorization, "alkdgjkladjg");
+    const verify = jwt.verify(authorization, "secret-boy");
 
     const { email } = verify;
 
@@ -133,7 +133,7 @@ app.post("/records", async (req, res) => {
   }
 
   try {
-    const payload = jwt.verify(authorization, "alkdgjkladjg");
+    const payload = jwt.verify(authorization, "secret-boy");
 
     const { email } = payload;
 
@@ -176,7 +176,7 @@ app.get("/records", async (req, res) => {
   }
 
   try {
-    const payload = jwt.verify(authorization, "alkdgjkladjg");
+    const payload = jwt.verify(authorization, "secret-boy");
 
     const { email } = payload;
 

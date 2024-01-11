@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }) => {
   ) => {
     try {
       const token = localStorage.getItem("token");
-      const {data} = await api.post(
+      const { data } = await api.post(
         "/records",
         {
           amount,

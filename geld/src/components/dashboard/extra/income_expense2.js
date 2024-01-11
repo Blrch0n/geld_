@@ -41,7 +41,9 @@ export default function IncomeExpense2() {
       </header>
       <hr></hr>
       <main className="w-full h-full flex item-center flex-row">
-        <Doughnut data={data} />
+        <div className="w-[250px] h-[250px]">
+          <Doughnut data={data} />
+        </div>
       </main>
     </div>
   );
