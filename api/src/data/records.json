@@ -1,1 +1,22 @@
-[{"amount":"12412","date":"2024-01-16","isExpense":false,"selectedCategory":"dasda","time":"16:22","userEmail":"123"},{"amount":"145","date":"2024-01-11","isExpense":false,"selectedCategory":"dsa","time":"15:35","userEmail":"123"},{"amount":"123","date":"2024-01-16","isExpense":true,"selectedCategory":"dasda","time":"13:37","userEmail":"123"},{"amount":"4124","date":"2024-01-17","isExpense":true,"selectedCategory":"12414","time":"13:39","userEmail":"123"},{"amount":"124","date":"2024-01-17","isExpense":true,"selectedCategory":"14124","time":"16:40","userEmail":"123"},{"amount":"","date":"","isExpense":true,"selectedCategory":"12414","time":"","userEmail":"123"},{"amount":"124","date":"2024-01-16","isExpense":false,"selectedCategory":"24","time":"15:42","userEmail":"123"},{"amount":"1241","date":"2024-01-24","isExpense":false,"selectedCategory":"14124","time":"13:46","userEmail":"123"},{"amount":"1231","date":"2024-01-25","isExpense":true,"selectedCategory":"dsa","time":"23:30","userEmail":"123"},{"amount":"432412","date":"2024-01-05","isExpense":true,"selectedCategory":"fdsf","time":"11:27","userEmail":"s"},{"amount":"52343","date":"","isExpense":true,"selectedCategory":"fdsaf","time":"","userEmail":"admin"},{"amount":"","date":"","isExpense":true,"selectedCategory":"fdsfsa","time":"","userEmail":""},{"amount":"4324","date":"","isExpense":false,"selectedCategory":"432423","time":"","userEmail":""}]
+[
+  {
+    "amount": "1341",
+    "date": "2024-01-04",
+    "isExpense": false,
+    "selectedCategory": "5424523",
+    "time": "14:54",
+    "IconColor": "#41CC00",
+    "selectedIcon": "GrAccessibility",
+    "userEmail": ""
+  },
+  {
+    "amount": "12414",
+    "date": "2024-01-11",
+    "isExpense": true,
+    "selectedCategory": "fdsafd",
+    "time": "14:54",
+    "IconColor": "#F9D100",
+    "selectedIcon": "GrAdd",
+    "userEmail": ""
+  }
+]

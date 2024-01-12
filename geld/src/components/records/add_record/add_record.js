@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import ShowCategoryOfAddRecord from "./show_category";
 import { useAuth } from "@/components/provider/AuthProvider";
+import * as icons from "react-icons/gr";
 
 export default function AddRecord() {
   const [amount, setAmount] = useState("");
@@ -13,7 +14,11 @@ export default function AddRecord() {
   const [time, setTime] = useState("");
   const { addRecord_ } = useAuth();
   const [openCategory, setOpenCategory] = useState(false);
+  const [selectedIconRecord, setSelectedIconRecord] =
+    useState("GrAccessibility");
+  const [RecordColor, setRecordColor] = useState("#000");
   const [selectedCategory, setSelectedCategory] = useState();
+  const Icon = icons[selectedIconRecord];
   return (
     <section className="w-full h-screen absolute flex items-center justify-center bg-[#00000080]">
       <div className="w-[792px] h-[512px] bg-white  rounded-[12px] flex-col flex">
@@ -71,8 +76,10 @@ export default function AddRecord() {
               <p className="absolute top-[12px] left-[16px]">Amount</p>
               {openCategory && (
                 <ShowCategoryOfAddRecord
+                  icon={setSelectedIconRecord}
                   select={setSelectedCategory}
                   open={setOpenCategory}
+                  color={setRecordColor}
                 ></ShowCategoryOfAddRecord>
               )}
             </div>
@@ -84,6 +91,7 @@ export default function AddRecord() {
                   setOpenCategory(!openCategory);
                 }}
               >
+                <Icon color={RecordColor}></Icon>
                 {selectedCategory ? selectedCategory : <p>Choose</p>}
                 <Image
                   alt="Picture of the author"
@@ -120,7 +128,15 @@ export default function AddRecord() {
               type="submit"
               className="bg-[#0166FF] rounded-[20px] w-full text-white h-[40px]"
               onClick={() => {
-                addRecord_(amount, date, isExpense, selectedCategory, time);
+                addRecord_(
+                  amount,
+                  date,
+                  isExpense,
+                  selectedCategory,
+                  time,
+                  IconColor,
+                  selectedIcon
+                );
                 setIsOpenRecord(false);
               }}
               value="Add Record"

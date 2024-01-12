@@ -139,7 +139,15 @@ app.post("/records", async (req, res) => {
 
     const { email } = payload;
 
-    const { amount, date, isExpense, selectedCategory, time } = req.body;
+    const {
+      amount,
+      date,
+      isExpense,
+      selectedCategory,
+      time,
+      IconColor,
+      selectedIcon,
+    } = req.body;
 
     const filePath = "src/data/records.json";
 
@@ -153,6 +161,8 @@ app.post("/records", async (req, res) => {
       isExpense,
       selectedCategory,
       time,
+      IconColor,
+      selectedIcon,
       userEmail: email,
     });
 

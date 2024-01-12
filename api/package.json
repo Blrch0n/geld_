@@ -17,7 +17,6 @@
     "fs-extra": "^11.2.0",
     "jsonwebtoken": "^9.0.2",
     "lsof": "^0.1.0",
-    "nodeman": "^1.1.2",
     "nodemon": "^3.0.2",
     "uuid": "^9.0.1"
   }

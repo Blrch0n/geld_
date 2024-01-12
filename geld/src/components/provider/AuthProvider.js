@@ -2,13 +2,7 @@
 
 import { api } from "@/common/axios";
 import { useRouter } from "next/navigation";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -113,7 +107,9 @@ export const AuthProvider = ({ children }) => {
     date,
     isExpense,
     selectedCategory,
-    time
+    time,
+    IconColor,
+    selectedIcon
   ) => {
     try {
       const token = localStorage.getItem("token");
@@ -125,6 +121,8 @@ export const AuthProvider = ({ children }) => {
           isExpense,
           selectedCategory,
           time,
+          IconColor,
+          selectedIcon,
         },
         {
           headers: {
