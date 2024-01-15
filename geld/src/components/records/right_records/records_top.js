@@ -1,12 +1,17 @@
-import { Context_ } from "@/app/records/page";
-import { useContext } from "react";
+import { useAuth } from "@/components/provider/AuthProvider";
 
 export default function HeaderRecords() {
-  const { sumNumber } = useContext(Context_);
+  const { days, addDays } = useAuth();
   return (
     <footer className="flex flex-col gap-[24px] w-full h-fit">
       <div className="flex flex-row w-full justify-between items-center">
-        <span>Last 30 Days</span>
+        <span
+          onClick={() => {
+            addDays();
+          }}
+        >
+          {`Last ${days} Days`}
+        </span>
         <select className="select select-bordered w-full max-w-xs">
           <option disabled>Newest first</option>
           <option>Latest</option>

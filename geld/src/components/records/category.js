@@ -11,7 +11,14 @@ export default function CategorySideBar() {
     <div className="flex flex-col">
       <footer className="flex flex-row w-full h-fit justify-between">
         <h1 className="text-[16px] font-[600] text-black">Category</h1>
-        <p className="font-[400] text-[#1F2937]">Clear</p>
+        <p
+          className="font-[400] text-[#1F2937]"
+          onClick={() => {
+            setSelectedCategory("");
+          }}
+        >
+          Clear
+        </p>
       </footer>
       <main className="w-full h-fit flex flex-col">
         {isReadyCategory &&

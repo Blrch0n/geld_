@@ -22,12 +22,16 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedType, setSelectedType] = useState("All");
+  const [amountPrice, setAmountPrice] = useState("0");
+
   return (
     <Context_.Provider
       value={{
         search,
         setSearch,
         selectedCategory,
+        amountPrice,
+        setAmountPrice,
         setSelectedCategory,
         selectedType,
         setSelectedType,

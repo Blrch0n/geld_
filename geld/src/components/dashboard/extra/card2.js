@@ -7,6 +7,7 @@ export default function Card2() {
         <span className="w-[8px] h-[8px] rounded-2/4 bg-[#84CC16]"></span>
         <h2>Your Income</h2>
       </header>
+      <hr></hr>
       <footer className="w-full p-[24px] h-full ">
         <main className="flex flex-col ">
           <h1>1200000₮</h1>

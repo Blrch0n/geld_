@@ -4,20 +4,25 @@ const { v4: uuidv4 } = require("uuid");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const { connectDatabase } = require("./database");
+const { Category } = require("./model/category.model");
+const { User } = require("./model/user.model");
+const { Record } = require("./model/record.model");
 const app = express();
+connectDatabase();
 app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/sign-in", async (req, res) => {
   const { email, password } = req.body;
 
-  const filePath = "src/data/users.json";
+  // const filePath = "src/data/users.json";
 
-  const usersRaw = await fs.readFile(filePath, "utf8");
+  // const usersRaw = await fs.readFile(filePath, "utf8");
 
-  const users = JSON.parse(usersRaw);
+  // const users = JSON.parse(usersRaw);
 
-  const user = users.find((user) => user.email === email);
+  const user = await User.findOne({ userEmail: email });
 
   if (!user) {
     return res.status(401).json({
@@ -39,29 +44,33 @@ app.post("/sign-in", async (req, res) => {
 });
 
 app.post("/sign-up", async (req, res) => {
-  const { name, email, password } = req.body;
-  const filePath = "src/data/users.json";
-  const usersRaw = await fs.readFile(filePath, "utf-8");
-  const users = JSON.parse(usersRaw);
-  const user = users.find((user) => user.email === email);
-  if (user) {
-    return res.status(401).json({
+  // const filePath = "src/data/users.json";
+  // const usersRaw = await fs.readFile(filePath, "utf-8");
+  // const users = JSON.parse(usersRaw);
+  try {
+    const { name, email, password } = req.body;
+    const user = await User.findOne({ userEmail: email });
+    if (user) {
+      return res.status(401).json({
+        message: "user already exists",
+      });
+    }
+    await User.create({
+      name: name,
+      userEmail: email,
+      password: password,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+    });
+    // await fs.writeFile(filePath, JSON.stringify(users));
+    const token = jwt.sign({ email }, "secret-boy");
+    res.json({
+      token,
       message: "user already exists",
     });
+  } catch (err) {
+    console.log(err);
   }
-  const id = uuidv4();
-  users.push({
-    id,
-    name,
-    email,
-    password,
-  });
-  await fs.writeFile(filePath, JSON.stringify(users));
-  const token = jwt.sign({ email }, "secret-boy");
-  res.json({
-    token,
-    message: "user already exists",
-  });
 });
 app.post("/category", async (req, res) => {
   const { authorization } = req.headers;
@@ -74,19 +83,20 @@ app.post("/category", async (req, res) => {
     const verify = jwt.verify(authorization, "secret-boy");
     const { email } = verify;
     const { categoryName, IconColor, selectedIcon } = req.body;
-    const filePath = "src/data/category.json";
-    const rawFile = await fs.readFile(filePath, "utf8");
+    // const filePath = "src/data/category.json";
+    // const rawFile = await fs.readFile(filePath, "utf8");
 
-    const file = JSON.parse(rawFile);
+    // const file = JSON.parse(rawFile);
 
-    file.push({
-      categoryName,
-      IconColor,
-      selectedIcon,
+    await Category.create({
+      categoryName: categoryName,
+      IconColor: IconColor,
+      selectedIcon: selectedIcon,
       userEmail: email,
+      Date: new Date(),
     });
 
-    await fs.writeFile(filePath, JSON.stringify(file));
+    // await fs.writeFile(filePath, JSON.stringify(file));
     res.json({
       message: "fine",
     });
@@ -108,13 +118,13 @@ app.get("/category", async (req, res) => {
 
     const { email } = verify;
 
-    const filePath = "src/data/category.json";
+    // const filePath = "src/data/category.json";
 
-    const rawFile = await fs.readFile(filePath, "utf-8");
+    // const rawFile = await fs.readFile(filePath, "utf-8");
 
-    const file = JSON.parse(rawFile);
+    // const file = JSON.parse(rawFile);
 
-    const userCategory = file.filter((user) => user.userEmail === email);
+    const userCategory = await Category.find({ userEmail: email });
 
     res.json({
       userCategory,
@@ -149,24 +159,24 @@ app.post("/records", async (req, res) => {
       selectedIcon,
     } = req.body;
 
-    const filePath = "src/data/records.json";
+    // const filePath = "src/data/records.json";
 
-    const recordsRaw = await fs.readFile(filePath, "utf8");
+    // const recordsRaw = await fs.readFile(filePath, "utf8");
 
-    const records = JSON.parse(recordsRaw);
+    // const records = JSON.parse(recordsRaw);
 
-    records.push({
-      amount,
-      date,
-      isExpense,
-      selectedCategory,
-      time,
-      IconColor,
-      selectedIcon,
+    await Record.create({
+      amount: amount,
+      date: new Date(date),
+      isExpense: isExpense,
+      selectedCategory: selectedCategory,
+      time: time,
+      IconColor: IconColor,
+      selectedIcon: selectedIcon,
       userEmail: email,
     });
 
-    await fs.writeFile(filePath, JSON.stringify(records));
+    // await fs.writeFile(filePath, JSON.stringify(records));
 
     res.json({
       message: "Record created",
@@ -180,6 +190,7 @@ app.post("/records", async (req, res) => {
 
 app.get("/records", async (req, res) => {
   const { authorization } = req.headers;
+  const { days } = req.query;
 
   if (!authorization) {
     return res.status(401).json({
@@ -192,16 +203,22 @@ app.get("/records", async (req, res) => {
 
     const { email } = payload;
 
-    const filePath = "src/data/records.json";
+    // const filePath = "src/data/records.json";
 
-    const recordsRaw = await fs.readFile(filePath, "utf8");
+    // const recordsRaw = await fs.readFile(filePath, "utf8");
 
-    const records = JSON.parse(recordsRaw);
+    // const records = JSON.parse(recordsRaw);
 
-    const usersRecords = records.filter((record) => record.userEmail === email);
+    const filterDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * days);
+
+    const usersRecords = await Record.find({ userEmail: email });
+
+    const filterData = usersRecords.filter(
+      (record) => record.date >= filterDate
+    );
 
     res.json({
-      records: usersRecords,
+      records: filterData,
     });
   } catch (error) {
     return res.status(401).json({

@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState();
   const [recordData, setRecordData] = useState();
   const [refresh, useRefresh] = useState(1);
+  const [days, setDays] = useState(7);
 
   const router = useRouter();
 
@@ -160,6 +161,9 @@ export const AuthProvider = ({ children }) => {
         headers: {
           Authorization: token,
         },
+        params: {
+          days: days,
+        },
       });
       const { records } = data;
       console.log(records);
@@ -169,6 +173,24 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+  const addDays = () => {
+    if (days == 7) {
+      setDays(14);
+    }
+    if (days == 14) {
+      setDays(30);
+    }
+    if (days == 30) {
+      setDays(60);
+    }
+    if (days == 60) {
+      setDays(90);
+    }
+    if (days == 90) {
+      setDays(7);
+    }
+    showRecords();
   };
 
   useEffect(() => {
@@ -197,6 +219,8 @@ export const AuthProvider = ({ children }) => {
         showRecords,
         addCategory,
         addRecord_,
+        addDays,
+        days,
         recordData,
         isReadyRecord,
         isReadyCategory,
