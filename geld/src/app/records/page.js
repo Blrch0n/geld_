@@ -14,15 +14,17 @@ export const Context_ = createContext();
 export default function Home() {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
-  useEffect(() => {
-    if (!isLoggedIn) router.push("/");
-  }, [isLoggedIn]);
-  if (!isLoggedIn) return null;
   const { isOpenRecord, isOpenCategory } = useContext(Context);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedType, setSelectedType] = useState("All");
   const [amountPrice, setAmountPrice] = useState("0");
+
+  useEffect(() => {
+    if (!isLoggedIn) router.push("/");
+  }, [isLoggedIn]);
+
+  if (!isLoggedIn) return null;
 
   return (
     <Context_.Provider
@@ -39,8 +41,10 @@ export default function Home() {
     >
       <section className="w-full h-screen flex flex-col gap-[24px] relative">
         <Header></Header>
+
         {isOpenRecord && <AddRecord></AddRecord>}
         {isOpenCategory && <AddCategory></AddCategory>}
+
         <section className="w-[1200px] h-screen flex flex-row gap-[24px] m-auto">
           <RecordsSideBar></RecordsSideBar>
           <RightRecords></RightRecords>

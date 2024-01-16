@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState();
   const [recordData, setRecordData] = useState();
   const [refresh, useRefresh] = useState(1);
-  const [days, setDays] = useState(7);
+  const [days, setDays] = useState(90);
 
   const router = useRouter();
 
@@ -206,10 +206,12 @@ export const AuthProvider = ({ children }) => {
 
     // showOn();
   }, []);
+
   useEffect(() => {
     showCategory();
     showRecords();
   }, [refresh]);
+
   return (
     <AuthContext.Provider
       value={{

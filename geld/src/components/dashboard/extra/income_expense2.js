@@ -2,6 +2,7 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { useAuth } from "@/components/provider/AuthProvider";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -32,6 +33,7 @@ export const data = {
 };
 
 export default function IncomeExpense2() {
+  const { recordData } = useAuth();
   return (
     <div className="w-[588px] h-[284px] rounded-[12px] flex flex-col bg-white">
       <header className="flex flex-row w-full h-[56px] px-[24px] py-[16px] justify-between">
@@ -39,9 +41,19 @@ export default function IncomeExpense2() {
         <p>Jun 1 - Nov 30</p>
       </header>
       <hr></hr>
-      <main className="w-full h-full flex item-center flex-row">
-        <div className="w-[250px] h-[250px]">
+      <main className="w-full h-full flex item-center flex-row px-[24px] py-[32px] gap-[47px]">
+        <div className="w-[163px] h-[163px]">
           <Doughnut data={data} />
+        </div>
+        <div className="flex flex-col w-full h-full">
+          <div clx>
+            <div className="h-fit w-fit flex flex-row items-center gap-2">
+              <div className="w-[12px] h-[12px] rounded-full bg-black"></div>
+              <p>Bills</p>
+            </div>
+            <p>{recordData}</p>
+            <p>15.50%</p>
+          </div>
         </div>
       </main>
     </div>

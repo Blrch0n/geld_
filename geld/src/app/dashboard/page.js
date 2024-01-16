@@ -1,7 +1,8 @@
-'use client'
+"use client";
 import Header from "@/components/all/header";
 import Card1 from "@/components/dashboard/extra/card1";
 import Card2 from "@/components/dashboard/extra/card2";
+import Card3 from "@/components/dashboard/extra/card3";
 import IncomeExpense1 from "@/components/dashboard/extra/income_expense";
 import IncomeExpense2 from "@/components/dashboard/extra/income_expense2";
 import LastRecords from "@/components/dashboard/extra/last_records";
@@ -10,8 +11,9 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
   const { isLoggedIn } = useAuth();
+
   useEffect(() => {
     if (!isLoggedIn) router.push("/");
   }, [isLoggedIn]);
@@ -24,7 +26,7 @@ export default function Home() {
         <div className="flex flex-row gap-[24px] w-full h-fit">
           <Card1></Card1>
           <Card2></Card2>
-          <Card2></Card2>
+          <Card3></Card3>
         </div>
         <div className="flex flex-row gap-[24px] w-full h-fit">
           <IncomeExpense1></IncomeExpense1>

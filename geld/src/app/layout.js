@@ -16,23 +16,23 @@ export default function RootLayout({ children }) {
   const [selectedIcon, setSelectedIcon] = useState("GrAccessibility");
   const [IconColor, setIconColor] = useState("");
   return (
-    <Context.Provider
-      value={{
-        isOpenCategory,
-        setIsOpenCategory,
-        isOpenRecord,
-        setIsOpenRecord,
-        selectedIcon,
-        IconColor,
-        setIconColor,
-        setSelectedIcon,
-      }}
-    >
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <Context.Provider
+          value={{
+            isOpenCategory,
+            setIsOpenCategory,
+            isOpenRecord,
+            setIsOpenRecord,
+            selectedIcon,
+            IconColor,
+            setIconColor,
+            setSelectedIcon,
+          }}
+        >
           <AuthProvider>{children}</AuthProvider>
-        </body>
-      </html>
-    </Context.Provider>
+        </Context.Provider>
+      </body>
+    </html>
   );
 }

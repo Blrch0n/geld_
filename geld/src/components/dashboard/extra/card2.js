@@ -14,7 +14,12 @@ export default function Card2() {
           <p>Your Income Amount</p>
         </main>
         <div className="flex flex-row ">
-          <Image src="/green_arrow_up.svg" alt="Picture of the author" width={24} height={24}></Image>
+          <Image
+            src="/green_arrow_up.svg"
+            alt="Picture of the author"
+            width={24}
+            height={24}
+          ></Image>
           <p>32% from last month</p>
         </div>
       </footer>

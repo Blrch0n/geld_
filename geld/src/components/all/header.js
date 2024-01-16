@@ -1,6 +1,5 @@
 "use client";
 import { Context } from "@/app/layout";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";

@@ -1,7 +1,7 @@
 import { useAuth } from "@/components/provider/AuthProvider";
 
 export default function HeaderRecords() {
-  const { days, addDays } = useAuth();
+  const { days, addDays, recordData, isReadyRecord } = useAuth();
   return (
     <footer className="flex flex-col gap-[24px] w-full h-fit">
       <div className="flex flex-row w-full justify-between items-center">
@@ -23,7 +23,13 @@ export default function HeaderRecords() {
           <input type="checkbox"></input>
           <label>Select all</label>
         </span>
-        <p>0</p>
+        <p>
+          {isReadyRecord &&
+            recordData.reduce(
+              (total, currentValue) => total + Number(currentValue.amount),
+              0
+            )}
+        </p>
       </div>
     </footer>
   );

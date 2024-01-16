@@ -210,12 +210,13 @@ app.get("/records", async (req, res) => {
     // const records = JSON.parse(recordsRaw);
 
     const filterDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * days);
+    console.log(days, filterDate);
 
     const usersRecords = await Record.find({ userEmail: email });
 
-    const filterData = usersRecords.filter(
-      (record) => record.date >= filterDate
-    );
+    const filterData = usersRecords.filter((record) => {
+      return record.date > filterDate;
+    });
 
     res.json({
       records: filterData,
