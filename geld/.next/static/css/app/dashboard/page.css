@@ -1658,6 +1658,15 @@ html {
 .h-\[20px\] {
   height: 20px;
 }
+.h-\[200px\] {
+  height: 200px;
+}
+.h-\[320px\] {
+  height: 320px;
+}
+.h-\[300px\] {
+  height: 300px;
+}
 .w-10 {
   width: 2.5rem;
 }
@@ -1739,6 +1748,18 @@ html {
 }
 .w-\[163px\] {
   width: 163px;
+}
+.w-\[200px\] {
+  width: 200px;
+}
+.w-\[0px\] {
+  width: 0px;
+}
+.w-\[320px\] {
+  width: 320px;
+}
+.w-\[300px\] {
+  width: 300px;
 }
 .max-w-xs {
   max-width: 20rem;

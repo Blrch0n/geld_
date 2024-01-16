@@ -8,7 +8,17 @@ export default function Card1() {
       <div className="w-full h-fit flex flex-row justify-between items-center">
         <div className="w-full h-fit flex flex-col">
           <p>Cash</p>
-          <p>{isReadyRecord && recordData[0].amount}</p>
+          <p>
+            {isReadyRecord &&
+              Math.abs(
+                recordData
+                  .filter((record) => record.isExpense === false)
+                  .reduce((a, b) => a + Number(b.amount), 0) -
+                  recordData
+                    .filter((record) => record.isExpense === true)
+                    .reduce((a, b) => a + Number(b.amount), 0)
+              )}
+          </p>
         </div>
         <img src="/union.svg" className="w-[12px] h-20px"></img>
       </div>

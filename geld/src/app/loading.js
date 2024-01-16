@@ -10,7 +10,7 @@ export default function Loading() {
           width={172}
           height={64}
         ></Image>
-        <span>
+        <span className="w-fit h-fit flex flex-col items-center">
           <span className="loading loading-spinner text-info"></span>
           <p className="text-[16px] font-[600]">Түр хүлээнэ үү...</p>
         </span>

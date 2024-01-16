@@ -1,6 +1,8 @@
+import { useAuth } from "@/components/provider/AuthProvider";
 import Image from "next/image";
 
 export default function Card2() {
+  const { recordData, isReadyRecord } = useAuth();
   return (
     <span className="w-[384px] h-[216px] rounded-[12px] bg-white flex flex-col">
       <header className="w-full h-[56px] px-[24px] py-[16px]">
@@ -10,7 +12,12 @@ export default function Card2() {
       <hr></hr>
       <footer className="w-full p-[24px] h-full ">
         <main className="flex flex-col ">
-          <h1>1200000₮</h1>
+          <h1>
+            {isReadyRecord &&
+              recordData
+                .filter((record) => record.isExpense === false)
+                .reduce((a, b) => a + Number(b.amount), 0)}
+          </h1>
           <p>Your Income Amount</p>
         </main>
         <div className="flex flex-row ">

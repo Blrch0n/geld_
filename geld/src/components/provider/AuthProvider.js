@@ -190,7 +190,7 @@ export const AuthProvider = ({ children }) => {
     if (days == 90) {
       setDays(7);
     }
-    showRecords();
+    useRefresh(refresh + 1);
   };
 
   useEffect(() => {
